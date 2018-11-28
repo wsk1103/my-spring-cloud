@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: spring-hystrix
+
+server:
+  port: 8766
+
+
+turbine:
+  app-config: service-hi,service-feign
+  aggregator:
+    cluster-config: default
+  cluster-name-expression: new String("default")
+#  instanceUrlSuffix: /hystrix.stream
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /

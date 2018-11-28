@@ -1,0 +1,97 @@
+## eureka集群使用
+## one
+#---
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+spring:
+  application:
+    name: eurka-server
+#  profiles: one
+#
+#---
+#
+## two
+#server:
+#  port: 8760
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+##    register-with-eureka: false
+##    fetch-registry: false
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8761/eureka/,http://${eureka.instance.hostname}:8759/eureka/
+#
+#spring:
+#  application:
+#    name: eurka-server
+#  profiles: two
+#
+#
+#---
+#server:
+#  port: 8759
+#
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+##    register-with-eureka: false
+##    fetch-registry: false
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:8760/eureka/,http://${eureka.instance.hostname}:8761/eureka/
+#
+#spring:
+#  application:
+#    name: eurka-server
+#  profiles: three
+#---
+#spring:
+#  application:
+#    name: spring-cloud-eureka
+#  profiles: peer1
+#server:
+#  port: 8000
+#eureka:
+#  instance:
+#    hostname: peer1
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer2:8001/eureka/,http://peer3:8002/eureka/
+#---
+#spring:
+#  application:
+#    name: spring-cloud-eureka
+#  profiles: peer2
+#server:
+#  port: 8001
+#eureka:
+#  instance:
+#    hostname: peer2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer1:8000/eureka/,http://peer3:8002/eureka/
+#---
+#spring:
+#  application:
+#    name: spring-cloud-eureka
+#  profiles: peer3
+#server:
+#  port: 8002
+#eureka:
+#  instance:
+#    hostname: peer3
+#  client:
+#    serviceUrl:
+#      defaultZone: http://peer1:8000/eureka/,http://peer2:8001/eureka/
