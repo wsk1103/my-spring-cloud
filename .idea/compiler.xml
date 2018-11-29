@@ -15,6 +15,7 @@
         <module name="hystrix" />
         <module name="ribbon" />
         <module name="server" />
+        <module name="zipkin" />
         <module name="zuul" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="mySpringCloud" options="-parameters" />
       <module name="ribbon" options="-parameters" />
       <module name="server" options="-parameters" />
+      <module name="zipkin" options="-parameters" />
       <module name="zuul" options="-parameters" />
     </option>
   </component>

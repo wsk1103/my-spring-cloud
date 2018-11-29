@@ -20,6 +20,9 @@ public class ClientApplication {
         SpringApplication.run(ClientApplication.class, args);
     }
 
+//    @Autowired
+//    private RestTemplate restTemplate;
+
     @Value("${server.port}")
     String port;
 
