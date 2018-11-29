@@ -25,7 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="client" options="-parameters" />
       <module name="client2" options="-parameters" />
-      <module name="common" options="-parameters" />
+      <module name="common" options="" />
       <module name="config-client" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="feign" options="-parameters" />
