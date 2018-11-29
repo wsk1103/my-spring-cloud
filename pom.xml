@@ -24,6 +24,7 @@
         <module>feign</module>
         <module>ribbon</module>
         <module>zuul</module>
+        <module>common</module>
     </modules>
 
     <properties>
