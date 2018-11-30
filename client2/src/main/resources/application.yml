@@ -3,9 +3,18 @@ server:
 
 spring:
   application:
-    name: service-hi
+    name: service-hi2
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
