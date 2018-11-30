@@ -1,3 +1,24 @@
+#server:
+#  port: 8763
+#
+#spring:
+#  application:
+#    name: service-hi2
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#      cors:
+#        allowed-origins: "*"
+#        allowed-methods: "*"
+
 server:
   port: 8763
 
@@ -7,9 +28,8 @@ spring:
 
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
 management:
   endpoints:
     web:

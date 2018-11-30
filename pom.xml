@@ -24,7 +24,9 @@
         <module>feign</module>
         <module>ribbon</module>
         <module>zuul</module>
-        <module>common</module>
+        <module>turbine</module>
+        <module>zipkin</module>
+        <module>hystrix</module>
     </modules>
 
     <properties>
@@ -35,14 +37,14 @@
     </properties>
 
     <dependencies>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -2,11 +2,12 @@ package com.wsk.common.response;
 
 import java.io.Serializable;
 
+
 /**
  * @author WuShukai
  * @version V1.0
  * @description
- * @date 2018/11/26  11:32
+ * @date 2018/11/30  16:32
  */
 public enum  ErrorResDto implements Serializable {
 
