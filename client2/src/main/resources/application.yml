@@ -24,7 +24,7 @@ server:
 
 spring:
   application:
-    name: service-hi2
+    name: service-client
 
 eureka:
   client:
