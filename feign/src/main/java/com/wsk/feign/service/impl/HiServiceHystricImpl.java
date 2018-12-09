@@ -14,6 +14,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class HiServiceHystricImpl implements HiService {
+
+    /**
+     * 当访问失败的时候，会快速调用该方法直接返回。
+     *
+     * @param name
+     * @return
+     */
     @Override
     public String say(String name) {
         return "sorry,error:" + name;

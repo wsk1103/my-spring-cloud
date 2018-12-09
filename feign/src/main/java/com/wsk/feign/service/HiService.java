@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @description
  * @date 2018/11/23  11:26
  */
-@FeignClient(value = "service-hi",fallback = HiServiceHystricImpl.class)
+@FeignClient(value = "service-client",fallback = HiServiceHystricImpl.class)
 public interface HiService {
     @RequestMapping(value = "/hi",method = RequestMethod.GET)
     String say(@RequestParam(value = "name") String name);
