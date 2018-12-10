@@ -12,14 +12,14 @@ spring:
 
 zuul:
   routes:
-    api-a:
-      path: /api-a/**
-      serviceId: service-hi
-    api-b:
-      path: /api-b/**
+    a:
+      path: /a/**
+      serviceId: service-client
+    b:
+      path: /b/**
       serviceId: service-feign
 
 
-ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
+#ribbon:
+#  ReadTimeout: 60000
+#  ConnectTimeout: 60000
