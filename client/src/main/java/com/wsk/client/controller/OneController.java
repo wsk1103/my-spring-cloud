@@ -28,7 +28,16 @@ public class OneController extends BaseController {
     @HystrixCommand(fallbackMethod = "error")
     public BaseResDto go(@RequestParam(value = "name", defaultValue = "skw") String name) {
         BaseResDto<User> u = new BaseResDto<>();
-        u.setMsg("this is a test");
+        u.setMsg("this is a go");
+        u.setData(new User());
+        return u;
+    }
+
+    @GetMapping("/hi")
+    @HystrixCommand(fallbackMethod = "error")
+    public BaseResDto say(@RequestParam(value = "name", defaultValue = "skw") String name) {
+        BaseResDto<User> u = new BaseResDto<>();
+        u.setMsg("this is a hi");
         u.setData(new User());
         return u;
     }
