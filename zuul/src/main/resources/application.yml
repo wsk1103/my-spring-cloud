@@ -9,6 +9,9 @@ server:
 spring:
   application:
     name: service-zuul
+  redis:
+    host: localhost
+    port: 6379
 
 zuul:
   routes:
@@ -18,8 +21,37 @@ zuul:
     b:
       path: /b/**
       serviceId: service-feign
-
-
+  ratelimit:
+    key-prefix: wsk
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    default-policy-list: #optional - will apply unless specific policy exists
+      - limit: 1 #optional - request number limit per refresh interval window
+        quota: 1 #optional - request time limit per refresh interval window (in seconds)
+        refresh-interval: 3 #default value (in seconds)
+#        type: #optional
+#          - user
+#          - origin
+#          - url
+    policy-list:
+      a:
+        - limit: 10 #optional - request number limit per refresh interval window
+          quota: 100 #optional - request time limit per refresh interval window (in seconds)
+          refresh-interval: 30 #default value (in seconds)
+      b:
+        - limit: 1 #optional - request number limit per refresh interval window
+          quota: 1 #optional - request time limit per refresh interval window (in seconds)
+          refresh-interval: 3 #default value (in seconds)
+#          type: #optional
+#            - user
+#            - origin
+#            - url
+#          type: #optional value for each type
+#            - user=anonymous
+#            - origin=somemachine.com
+#            - url=/api #url prefix
+#            - role=user
 #ribbon:
 #  ReadTimeout: 60000
 #  ConnectTimeout: 60000

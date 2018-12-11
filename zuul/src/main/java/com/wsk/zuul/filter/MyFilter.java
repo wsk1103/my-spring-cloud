@@ -54,7 +54,7 @@ public class MyFilter extends ZuulFilter {
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             try {
-                ctx.getResponse().getWriter().write("token is empty");
+                ctx.getResponse().getWriter().write("{\"msg\": \"token is empty\"}");
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }

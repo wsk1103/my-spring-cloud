@@ -43,7 +43,7 @@ eureka:
 turbine:
 #  app-config: service-hi,service-hi2
 #指定需要监控的servicename，多个service以,间隔
-  app-config: service-feign
+  app-config: service-feign,service-zuul
 #指定集群名称，默认为default，当设立了多个集群时，可以在Hystrix指定集群名称来查看监控
   clusterNameExpression: new String("default")
 #合并同一个host多个端口的数据
