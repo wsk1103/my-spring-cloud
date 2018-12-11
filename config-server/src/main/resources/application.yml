@@ -1,0 +1,36 @@
+#server.port=8888
+#
+#spring.application.name=config-server
+#spring.cloud.config.server.git.uri=https://github.com/forezp/SpringcloudConfig/
+#spring.cloud.config.server.git.searchPaths=respo
+#spring.cloud.config.label=master
+#spring.cloud.config.server.git.username=
+#spring.cloud.config.server.git.password=
+#
+#eureka.client.register-with-eureka=false
+#eureka.client.fetch-registry=false
+#
+#eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/forezp/SpringcloudConfig/
+          search-paths: respo
+          username:
+          password:
+      label: master
+
+
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url: http://localhost:8761/eureka/
