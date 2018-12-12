@@ -12,6 +12,7 @@
         <module name="config-client" />
         <module name="config-server" />
         <module name="feign" />
+        <module name="gateway" />
         <module name="hystrix" />
         <module name="ribbon" />
         <module name="server" />
@@ -34,6 +35,7 @@
       <module name="config-client" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="feign" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="hystrix" options="-parameters" />
       <module name="mySpringCloud" options="-parameters" />
       <module name="ribbon" options="-parameters" />
