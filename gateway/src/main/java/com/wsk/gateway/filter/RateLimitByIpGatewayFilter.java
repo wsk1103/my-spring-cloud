@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
@@ -31,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-public class RateLimitByIpGatewayFilter implements GatewayFilter, Ordered {
+public class RateLimitByIpGatewayFilter extends AbstractGatewayFilterFactory<Object> implements GatewayFilter, Ordered {
 
     /**
      * 桶的最大容量，即能装载 Token 的最大数量
@@ -75,4 +76,8 @@ public class RateLimitByIpGatewayFilter implements GatewayFilter, Ordered {
         return -1000;
     }
 
+    @Override
+    public GatewayFilter apply(Object config) {
+        return this;
+    }
 }

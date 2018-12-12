@@ -1,9 +1,12 @@
 package com.wsk.gateway.config;
 
 import com.wsk.gateway.filter.ElapsedGatewayFilterFactory;
+import com.wsk.gateway.filter.RateLimitByIpGatewayFilter;
 import com.wsk.gateway.filter.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
 
 /**
  * @author WuShukai
@@ -20,6 +23,10 @@ public class MyConfig {
     @Bean
     public ElapsedGatewayFilterFactory elapsedGatewayFilterFactory() {
         return new ElapsedGatewayFilterFactory();
+    }
+    @Bean
+    public RateLimitByIpGatewayFilter rateLimitByIpGatewayFilter() {
+        return new RateLimitByIpGatewayFilter(10, 1, Duration.ofSeconds(1));
     }
 
 }

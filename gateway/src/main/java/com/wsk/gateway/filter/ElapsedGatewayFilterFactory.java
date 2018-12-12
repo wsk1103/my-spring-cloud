@@ -1,5 +1,6 @@
 package com.wsk.gateway.filter;
 
+import com.wsk.gateway.config.Config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2018/12/12  17:01
  */
 @Slf4j
-public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<ElapsedGatewayFilterFactory.Config> {
+public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<Config> {
 
     private static final String ELAPSED_TIME_BEGIN = "elapsedTimeBegin";
     private static final String KEY = "withParams";
@@ -31,7 +32,6 @@ public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<El
 
     @Override
     public GatewayFilter apply(Config config) {
-
         return (exchange, chain) -> {
             exchange.getAttributes().put(ELAPSED_TIME_BEGIN, System.currentTimeMillis());
             return chain.filter(exchange).then(
@@ -52,18 +52,4 @@ public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<El
         };
     }
 
-
-    public static class Config {
-
-        private boolean withParams;
-
-        public boolean isWithParams() {
-            return withParams;
-        }
-
-        public void setWithParams(boolean withParams) {
-            this.withParams = withParams;
-        }
-
-    }
 }
