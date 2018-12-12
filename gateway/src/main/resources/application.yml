@@ -1,0 +1,47 @@
+server:
+  port: 8766
+
+spring:
+  application:
+    name: service-gateway
+
+  cloud:
+    gateway:
+      default-filters:
+        - Elapsed=true
+#      default-filters:
+#        - name: RequestRateLimiter
+#          args:
+#            key-resolver: "#{@remoteAddrKeyResolver}"
+#            rate-limiter: "#{@customRateLimiter}"   # token
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-client #唯一标识
+          uri: lb://service-client #注册到服务中心的服务名
+          predicates:
+            - Path=/client/** #访问路径进行转发
+          filters:
+            - StripPrefix=1 #切割掉/client/后访问uri
+            - name: RateLimitByIpGatewayFilter
+
+#      routes:
+#        - id: service-client
+#          uri: lb://SERVICE-CLIENT
+#          order: 0
+#          predicates:
+#            - Path=/client/**
+#          filters:
+#            - StripPrefix=1
+#            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+
+#  redis:
+#    host: localhost
+#    port: 6379
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
