@@ -4,22 +4,6 @@ server:
 spring:
   application:
     name: service-gateway
-#
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: prefix_route
-#          uri: lb://service-client
-#          predicates:
-#            - Path=/sky/myHistrix
-#          filters:
-#            - name: Hystrix # Hystrix Filter的名称
-#              args: # Hystrix配置参数
-#                name: fallbackcmd #HystrixCommand的名字
-#                fallbackUri: forward:/fallback #fallback对应的uri
-
-#Hystrix的fallbackcmd的时间
-#hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
   cloud:
     gateway:
       default-filters:
@@ -44,14 +28,19 @@ spring:
               args:
                 name: fallbackcmd
                 fallbackUri: forward:/fallback
+            - name: RequestRateLimiter #内置限流工具，名称必须为RequestRateLimiter
+              args:
+                #使用SpEL按名称引用bean
+                key-resolver: "#{@remoteAddrKeyResolver}"
+                #允许用户每秒处理多少个请求
+                redis-rate-limiter.replenishRate: 1
+                #令牌桶的容量，允许在一秒钟内完成的最大请求数
+                redis-rate-limiter.burstCapacity: 5
 #        - id: hystrix
 #          uri: lb://service-client
 #          predicates:
 #            - Path=/sky/**
 #          filters:
-
-
-
 #      routes:
 #        - id: service-client
 #          uri: lb://SERVICE-CLIENT
@@ -62,9 +51,10 @@ spring:
 #            - StripPrefix=1
 #            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
 
-#  redis:
-#    host: localhost
-#    port: 6379
+# gateway内置限流工具
+  redis:
+    host: localhost
+    port: 6379
 
 
 eureka:
