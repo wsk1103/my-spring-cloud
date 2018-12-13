@@ -39,21 +39,14 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-      cors:
-        allowed-origins: "*"
-        allowed-methods: "*"
 
 turbine:
 #  app-config: service-hi,service-hi2
-  app-config: service-feign
-  aggregator:
-    clusterConfig: default
+#指定需要监控的servicename，多个service以,间隔
+  app-config: service-feign,service-zuul
+#指定集群名称，默认为default，当设立了多个集群时，可以在Hystrix指定集群名称来查看监控
   clusterNameExpression: new String("default")
-  combine-host: true
-  instanceUrlSuffix:
-    default: actuator/hystrix.stream
+#合并同一个host多个端口的数据
+  combine-host-port: true
+#  instanceUrlSuffix:
+#    default: actuator/hystrix.stream

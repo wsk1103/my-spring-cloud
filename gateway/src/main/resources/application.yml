@@ -1,0 +1,83 @@
+server:
+  port: 8766
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - Sky=true
+#      default-filters:
+#        - name: RequestRateLimiter
+#          args:
+#            key-resolver: "#{@remoteAddrKeyResolver}"
+#            rate-limiter: "#{@customRateLimiter}"   # token
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: service-client #服务唯一ID标识
+          uri: lb://service-client # 注册中心的服务id
+          predicates:
+            - Path=/client/** #请求转发
+          filters:
+            - StripPrefix=1 #切割请求，去除/client/
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+            - name: RequestRateLimiter #内置限流工具，名称必须为RequestRateLimiter
+              args:
+                #使用SpEL按名称引用bean
+                key-resolver: "#{@remoteAddrKeyResolver}"
+                #允许用户每秒处理多少个请求
+                redis-rate-limiter.replenishRate: 1
+                #令牌桶的容量，允许在一秒钟内完成的最大请求数
+                redis-rate-limiter.burstCapacity: 5
+#        - id: hystrix
+#          uri: lb://service-client
+#          predicates:
+#            - Path=/sky/**
+#          filters:
+#      routes:
+#        - id: service-client
+#          uri: lb://SERVICE-CLIENT
+#          order: 0
+#          predicates:
+#            - Path=/client/**
+#          filters:
+#            - StripPrefix=1
+#            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+
+# gateway内置限流工具
+  redis:
+    host: localhost
+    port: 6379
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+#Hystrix的fallbackcmd的时间
+#hystrix:
+#  command:
+#    fallbackcmd:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
+
+#Hystrix的fallbackcmd的时间
+#hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: TRACE
+#    org.springframework.http.server.reactive: DEBUG
+#    org.springframework.web.reactive: DEBUG
+#    reactor.ipc.netty: DEBUG
+
