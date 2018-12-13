@@ -4,11 +4,26 @@ server:
 spring:
   application:
     name: service-gateway
+#
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: prefix_route
+#          uri: lb://service-client
+#          predicates:
+#            - Path=/sky/myHistrix
+#          filters:
+#            - name: Hystrix # Hystrix Filterçš„åç§°
+#              args: # Hystrixé…ç½®å‚æ•°
+#                name: fallbackcmd #HystrixCommandçš„åå­—
+#                fallbackUri: forward:/fallback #fallbackå¯¹åº”çš„uri
 
+#Hystrixçš„fallbackcmdçš„æ—¶é—´
+#hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
   cloud:
     gateway:
       default-filters:
-        - Elapsed=true
+        - Sky=true
 #      default-filters:
 #        - name: RequestRateLimiter
 #          args:
@@ -17,14 +32,25 @@ spring:
       discovery:
         locator:
           enabled: true
+          lower-case-service-id: true
       routes:
-        - id: service-client #Î¨Ò»±êÊ¶
-          uri: lb://service-client #×¢²áµ½·şÎñÖĞĞÄµÄ·şÎñÃû
+        - id: service-client #æœåŠ¡å”¯ä¸€IDæ ‡è¯†
+          uri: lb://service-client # æ³¨å†Œä¸­å¿ƒçš„æœåŠ¡id
           predicates:
-            - Path=/client/** #·ÃÎÊÂ·¾¶½øĞĞ×ª·¢
+            - Path=/client/** #è¯·æ±‚è½¬å‘
           filters:
-            - StripPrefix=1 #ÇĞ¸îµô/client/ºó·ÃÎÊuri
-            - name: RateLimitByIpGatewayFilter
+            - StripPrefix=1 #åˆ‡å‰²è¯·æ±‚ï¼Œå»é™¤/client/
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+#        - id: hystrix
+#          uri: lb://service-client
+#          predicates:
+#            - Path=/sky/**
+#          filters:
+
+
 
 #      routes:
 #        - id: service-client
@@ -45,3 +71,23 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+#Hystrixçš„fallbackcmdçš„æ—¶é—´
+#hystrix:
+#  command:
+#    fallbackcmd:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
+
+#Hystrixçš„fallbackcmdçš„æ—¶é—´
+#hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: TRACE
+#    org.springframework.http.server.reactive: DEBUG
+#    org.springframework.web.reactive: DEBUG
+#    reactor.ipc.netty: DEBUG
+

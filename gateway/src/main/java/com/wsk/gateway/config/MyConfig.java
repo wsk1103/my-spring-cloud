@@ -1,7 +1,7 @@
 package com.wsk.gateway.config;
 
-import com.wsk.gateway.filter.ElapsedGatewayFilterFactory;
-import com.wsk.gateway.filter.RateLimitByIpGatewayFilter;
+import com.wsk.gateway.filter.SkyGatewayFilterFactory;
+import com.wsk.gateway.filter.SkyRateLimitByIpGatewayFilter;
 import com.wsk.gateway.filter.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +21,13 @@ public class MyConfig {
         return new TokenFilter();
     }
     @Bean
-    public ElapsedGatewayFilterFactory elapsedGatewayFilterFactory() {
-        return new ElapsedGatewayFilterFactory();
+    public SkyGatewayFilterFactory skyGatewayFilterFactory() {
+        return new SkyGatewayFilterFactory();
     }
+
     @Bean
-    public RateLimitByIpGatewayFilter rateLimitByIpGatewayFilter() {
-        return new RateLimitByIpGatewayFilter(10, 1, Duration.ofSeconds(1));
+    public SkyRateLimitByIpGatewayFilter skyRateLimitByIpGatewayFilter() {
+        return new SkyRateLimitByIpGatewayFilter(10, 1, Duration.ofSeconds(1));
     }
 
 }

@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 /**
  * @author WuShukai
  * @version V1.0
- * @description 全局过滤器
+ * @description 全局过滤器，每次的请求都需要带上token
  * @date 2018/12/12  16:55
  */
 public class TokenFilter implements GlobalFilter, Ordered {
@@ -19,7 +19,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         if (token == null || token.isEmpty()) {
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
             return exchange.getResponse().setComplete();
         }
         return chain.filter(exchange);

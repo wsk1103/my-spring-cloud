@@ -1,6 +1,6 @@
 package com.wsk.gateway.filter;
 
-import com.wsk.gateway.config.Config;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2018/12/12  17:01
  */
 @Slf4j
-public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<Config> {
+public class SkyGatewayFilterFactory extends AbstractGatewayFilterFactory<SkyGatewayFilterFactory.Config> {
 
     private static final String ELAPSED_TIME_BEGIN = "elapsedTimeBegin";
     private static final String KEY = "withParams";
@@ -26,7 +26,7 @@ public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<Co
         return Collections.singletonList(KEY);
     }
 
-    public ElapsedGatewayFilterFactory() {
+    public SkyGatewayFilterFactory() {
         super(Config.class);
     }
 
@@ -50,6 +50,11 @@ public class ElapsedGatewayFilterFactory extends AbstractGatewayFilterFactory<Co
                     })
             );
         };
+    }
+
+    @Data
+    static class Config {
+        private boolean withParams;
     }
 
 }

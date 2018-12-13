@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author WuShukai
  * @version V1.0
@@ -40,6 +42,17 @@ public class OneController extends BaseController {
     @GetMapping("/hi")
     @HystrixCommand(fallbackMethod = "error")
     public BaseResDto say(@RequestParam(value = "name", defaultValue = "skw") String name) {
+        BaseResDto<User> u = new BaseResDto<>();
+        u.setMsg("this is a hi:" + port);
+        u.setData(new User());
+        return u;
+    }
+
+    @GetMapping("/sky/histrix")
+    public BaseResDto myHistrix(@RequestParam(value = "name", defaultValue = "true") boolean name) throws InterruptedException {
+        if (name) {
+            TimeUnit.SECONDS.sleep(10);
+        }
         BaseResDto<User> u = new BaseResDto<>();
         u.setMsg("this is a hi:" + port);
         u.setData(new User());
