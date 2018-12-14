@@ -28,14 +28,14 @@ spring:
             - Path=/client/** #请求转发
           filters:
             - StripPrefix=1 #切割请求，去除/client/
-            - name: RequestRateLimiter #内置限流工具，名称必须为RequestRateLimiter
-              args:
-                #使用SpEL按名称引用bean
-                key-resolver: "#{@remoteAddrKeyResolver}"
-                #允许用户每秒处理多少个请求
-                redis-rate-limiter.replenishRate: 1
-                #令牌桶的容量，允许在一秒钟内完成的最大请求数
-                redis-rate-limiter.burstCapacity: 5
+#            - name: RequestRateLimiter #内置限流工具，名称必须为RequestRateLimiter
+#              args:
+#                #使用SpEL按名称引用bean
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                #允许用户每秒处理多少个请求
+#                redis-rate-limiter.replenishRate: 1
+#                #令牌桶的容量，允许在一秒钟内完成的最大请求数
+#                redis-rate-limiter.burstCapacity: 5
 
             - name: Retry #重试机制
               args:
@@ -57,9 +57,9 @@ spring:
 #            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
 
 # gateway内置限流工具
-  redis:
-    host: localhost
-    port: 6379
+#  redis:
+#    host: localhost
+#    port: 6379
 
 
 eureka:

@@ -1,12 +1,18 @@
 package com.wsk.gateway.filter;
 
+import com.wsk.gateway.config.PropertiesConfig;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 /**
  * @author WuShukai
@@ -15,12 +21,25 @@ import reactor.core.publisher.Mono;
  * @date 2018/12/12  16:55
  */
 @Slf4j
+@Data
+@EnableConfigurationProperties(PropertiesConfig.class)
 public class TokenFilter implements GlobalFilter, Ordered {
+
+    @Autowired
+    private PropertiesConfig propertiesConfig;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String uri = exchange.getRequest().getURI().toString();
-        log.info("the uri is " + uri);
+        List<String> all = propertiesConfig.handleUri();
+        String uri = exchange.getRequest().getPath().pathWithinApplication().value();
+        log.info("访问的url为：{}", uri);
+        for (String url : all) {
+            //过滤不需要拥有token的连接
+            if (uri.startsWith(url)) {
+                log.info("不需要拥有token的uri：{}", uri);
+                return chain.filter(exchange);
+            }
+        }
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         if (token == null || token.isEmpty()) {
             exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
@@ -28,6 +47,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
         }
         return chain.filter(exchange);
     }
+
 
     @Override
     public int getOrder() {
