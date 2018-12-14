@@ -22,6 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="my-spring-cloud" target="1.8" />
       <module name="service-hi" target="1.8" />
       <module name="service-lucy" target="1.8" />
       <module name="service-turbine" target="1.8" />
