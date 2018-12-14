@@ -8,6 +8,10 @@ spring:
     gateway:
       default-filters:
         - Sky=true
+        - name: Hystrix #全局异常熔断处理
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
 #      default-filters:
 #        - name: RequestRateLimiter
 #          args:
@@ -16,7 +20,7 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+          lower-case-service-id: true #在eureka中，服务是以大写的形式注册的，可以转化成小写
       routes:
         - id: service-client #服务唯一ID标识
           uri: lb://service-client # 注册中心的服务id
@@ -24,10 +28,6 @@ spring:
             - Path=/client/** #请求转发
           filters:
             - StripPrefix=1 #切割请求，去除/client/
-            - name: Hystrix
-              args:
-                name: fallbackcmd
-                fallbackUri: forward:/fallback
             - name: RequestRateLimiter #内置限流工具，名称必须为RequestRateLimiter
               args:
                 #使用SpEL按名称引用bean
@@ -36,6 +36,11 @@ spring:
                 redis-rate-limiter.replenishRate: 1
                 #令牌桶的容量，允许在一秒钟内完成的最大请求数
                 redis-rate-limiter.burstCapacity: 5
+
+            - name: Retry #重试机制
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY
 #        - id: hystrix
 #          uri: lb://service-client
 #          predicates:

@@ -22,7 +22,7 @@ public class HystrixController {
 
     @GetMapping("/fallback")
     public BaseResDto fallback() {
-        return ErrorResDto.ERROR_RES_DTO.getBase();
+        return ErrorResDto.ERROR_FAIL_BACK.getBase();
     }
 
 }

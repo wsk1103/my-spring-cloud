@@ -1,5 +1,6 @@
 package com.wsk.gateway.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -13,10 +14,13 @@ import reactor.core.publisher.Mono;
  * @description 全局过滤器，每次的请求都需要带上token
  * @date 2018/12/12  16:55
  */
+@Slf4j
 public class TokenFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String uri = exchange.getRequest().getURI().toString();
+        log.info("the uri is " + uri);
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         if (token == null || token.isEmpty()) {
             exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
