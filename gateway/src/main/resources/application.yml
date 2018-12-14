@@ -36,7 +36,10 @@ spring:
 #                redis-rate-limiter.replenishRate: 1
 #                #令牌桶的容量，允许在一秒钟内完成的最大请求数
 #                redis-rate-limiter.burstCapacity: 5
-
+            - name: SkyRateLimitByIp
+              args:
+                name: open
+                value: close
             - name: Retry #重试机制
               args:
                 retries: 3
@@ -76,9 +79,21 @@ eureka:
 #          thread:
 #            timeoutInMilliseconds: 3000
 
-#Hystrix的fallbackcmd的时间
-#hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 5000
-
+#Hystrix的fallbackcmd的时间，默认为1s
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 #毫秒
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 5000
 #logging:
 #  level:
 #    org.springframework.cloud.gateway: TRACE

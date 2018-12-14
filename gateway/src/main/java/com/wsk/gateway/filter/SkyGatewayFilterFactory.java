@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class SkyGatewayFilterFactory extends AbstractGatewayFilterFactory<SkyGatewayFilterFactory.Config> {
 
-    private static final String ELAPSED_TIME_BEGIN = "elapsedTimeBegin";
+    private static final String TIME_BEGIN = "TimeBegin";
     private static final String KEY = "withParams";
 
     @Override
@@ -33,10 +33,10 @@ public class SkyGatewayFilterFactory extends AbstractGatewayFilterFactory<SkyGat
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            exchange.getAttributes().put(ELAPSED_TIME_BEGIN, System.currentTimeMillis());
+            exchange.getAttributes().put(TIME_BEGIN, System.currentTimeMillis());
             return chain.filter(exchange).then(
                     Mono.fromRunnable(() -> {
-                        Long startTime = exchange.getAttribute(ELAPSED_TIME_BEGIN);
+                        Long startTime = exchange.getAttribute(TIME_BEGIN);
                         if (startTime != null) {
                             StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
                                     .append(": ")

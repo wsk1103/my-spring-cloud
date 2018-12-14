@@ -51,7 +51,7 @@ public class OneController extends BaseController {
     @GetMapping("/sky/histrix")
     public BaseResDto myHistrix(@RequestParam(value = "name", defaultValue = "true") boolean name) throws InterruptedException {
         if (name) {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(4);
         }
         BaseResDto<User> u = new BaseResDto<>();
         u.setMsg("this is a hi:" + port);

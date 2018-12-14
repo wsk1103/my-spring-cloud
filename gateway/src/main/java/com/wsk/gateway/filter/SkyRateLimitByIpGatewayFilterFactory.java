@@ -8,6 +8,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
@@ -30,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-public class SkyRateLimitByIpGatewayFilter /*extends AbstractGatewayFilterFactory<Object>*/ implements GatewayFilter, Ordered {
+public class SkyRateLimitByIpGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory implements GatewayFilter, Ordered {
 
     /**
      * 桶的最大容量，即能装载 Token 的最大数量
@@ -47,7 +48,8 @@ public class SkyRateLimitByIpGatewayFilter /*extends AbstractGatewayFilterFactor
      */
     private Duration refillDuration;
 
-    /*    *//**
+    /*    */
+    /**
      * 是否调用该过滤器
      *//*
     private boolean filterConfig;*/
@@ -80,11 +82,40 @@ public class SkyRateLimitByIpGatewayFilter /*extends AbstractGatewayFilterFactor
     }
 
 /*    @Override
-    public GatewayFilter apply(Object config) {
-//        if (filterConfig) {
-        //开启过滤器
-        return this;
+    public GatewayFilter apply(SkyRateLimitByIpGatewayFilterFactory.Config config) {
+//        if (config.isWithParams()) {
+            //开启过滤器
+            return this;
 //        }
 //        return (exchange, chain) -> chain.filter(exchange);
+    }*/
+
+    @Override
+    public GatewayFilter apply(NameValueConfig config) {
+        if (config.getName().equals("open")) {
+            return this;
+        }
+        return (exchange, chain) -> chain.filter(exchange);
+    }
+
+/*    public static class Config {
+        private String name;
+        private URI fallbackUri;
+
+        public String getName() {
+            return name;
+        }
+
+        public URI getFallbackUri() {
+            return fallbackUri;
+        }
+
+        public void setFallbackUri(URI fallbackUri) {
+            if (fallbackUri != null && !"forward".equals(fallbackUri.getScheme())) {
+                throw new IllegalArgumentException("Hystrix Filter currently only supports 'forward' URIs, found " + fallbackUri);
+            }
+            this.fallbackUri = fallbackUri;
+        }
+
     }*/
 }
