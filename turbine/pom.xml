@@ -12,9 +12,9 @@
     <description>service-turbine</description>
 
     <parent>
-        <groupId>my-spring-cloud</groupId>
-        <artifactId>MySpringCloud</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>com.wsk</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <properties>

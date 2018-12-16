@@ -8,10 +8,10 @@ spring:
     gateway:
       default-filters:
         - Sky=true
-        - name: Hystrix #全局异常熔断处理
+        - name: Hystrix #全局异常熔断处理，必须为Hystrix，会自动匹配HystrixGatewayFilterFactory
           args:
-            name: fallbackcmd
-            fallbackUri: forward:/fallback
+            name: fallbackcmd #必须为fallbackcmd，用于HystrixGatewayFilterFactory中bean的声明
+            fallbackUri: forward:/fallback #当熔断的时候，跳转该链接
 #      default-filters:
 #        - name: RequestRateLimiter
 #          args:
@@ -60,9 +60,9 @@ spring:
 #            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
 
 # gateway内置限流工具
-#  redis:
-#    host: localhost
-#    port: 6379
+  redis:
+    host: localhost
+    port: 6379
 
 
 eureka:

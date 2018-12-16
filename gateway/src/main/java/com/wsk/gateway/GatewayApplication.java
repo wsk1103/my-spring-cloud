@@ -23,6 +23,7 @@ public class GatewayApplication {
                 .route(r -> r.path("/client/**")
                         .filters(f -> f.stripPrefix(1)
                                 .filter(new SkyRateLimitByIpGatewayFilterFactory(10, 1, Duration.ofSeconds(1)))
+                                //多个过滤器的时候，可以继续构造下去
                         )
                         .uri("lb://service-client")
                         .order(0)

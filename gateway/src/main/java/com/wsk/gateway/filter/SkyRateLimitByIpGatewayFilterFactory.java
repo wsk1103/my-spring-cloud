@@ -48,12 +48,6 @@ public class SkyRateLimitByIpGatewayFilterFactory extends AbstractNameValueGatew
      */
     private Duration refillDuration;
 
-    /*    */
-    /**
-     * 是否调用该过滤器
-     *//*
-    private boolean filterConfig;*/
-
     private static final Map<String, Bucket> CACHE = new ConcurrentHashMap<>();
 
     private Bucket createNewBucket() {
@@ -71,6 +65,7 @@ public class SkyRateLimitByIpGatewayFilterFactory extends AbstractNameValueGatew
         if (bucket.tryConsume(1)) {
             return chain.filter(exchange);
         } else {
+            //请求太多，服务器之间返回 TOO_MANY_REQUESTS 429
             exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
             return exchange.getResponse().setComplete();
         }
@@ -81,41 +76,12 @@ public class SkyRateLimitByIpGatewayFilterFactory extends AbstractNameValueGatew
         return -1000;
     }
 
-/*    @Override
-    public GatewayFilter apply(SkyRateLimitByIpGatewayFilterFactory.Config config) {
-//        if (config.isWithParams()) {
-            //开启过滤器
-            return this;
-//        }
-//        return (exchange, chain) -> chain.filter(exchange);
-    }*/
-
     @Override
     public GatewayFilter apply(NameValueConfig config) {
-        if (config.getName().equals("open")) {
+        //开启限流
+        if ("open".equals(config.getName())) {
             return this;
         }
         return (exchange, chain) -> chain.filter(exchange);
     }
-
-/*    public static class Config {
-        private String name;
-        private URI fallbackUri;
-
-        public String getName() {
-            return name;
-        }
-
-        public URI getFallbackUri() {
-            return fallbackUri;
-        }
-
-        public void setFallbackUri(URI fallbackUri) {
-            if (fallbackUri != null && !"forward".equals(fallbackUri.getScheme())) {
-                throw new IllegalArgumentException("Hystrix Filter currently only supports 'forward' URIs, found " + fallbackUri);
-            }
-            this.fallbackUri = fallbackUri;
-        }
-
-    }*/
 }

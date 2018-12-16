@@ -35,7 +35,7 @@ public class OneController extends BaseController {
     public BaseResDto go(@RequestParam(value = "name", defaultValue = "skw") String name) {
         BaseResDto<User> u = new BaseResDto<>();
         u.setMsg("this is a go:" + port);
-        u.setData(new User());
+        u.setData(User.builder().name(name).build());
         return u;
     }
 
@@ -44,7 +44,7 @@ public class OneController extends BaseController {
     public BaseResDto say(@RequestParam(value = "name", defaultValue = "skw") String name) {
         BaseResDto<User> u = new BaseResDto<>();
         u.setMsg("this is a hi:" + port);
-        u.setData(new User());
+        u.setData(User.builder().name(name).build());
         return u;
     }
 

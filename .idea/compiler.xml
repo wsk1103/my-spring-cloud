@@ -22,7 +22,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="my-spring-cloud" target="1.8" />
       <module name="service-hi" target="1.8" />
       <module name="service-lucy" target="1.8" />
       <module name="service-turbine" target="1.8" />
@@ -39,6 +38,7 @@
       <module name="gateway" options="-parameters" />
       <module name="hystrix" options="-parameters" />
       <module name="mySpringCloud" options="-parameters" />
+      <module name="parent" options="-parameters" />
       <module name="ribbon" options="-parameters" />
       <module name="server" options="-parameters" />
       <module name="service-hi" options="-parameters" />
