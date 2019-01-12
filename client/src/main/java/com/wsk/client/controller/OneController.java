@@ -20,13 +20,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class OneController extends BaseController {
 
-
-/*    @GetMapping("/user")
-    @HystrixCommand(fallbackMethod = "error")
-    public User user(@RequestParam(value = "name", defaultValue = "skw") String name) {
-        return User.builder().name(name).password("test").build();
-    }*/
-
     @Value("${server.port}")
     String port;
 
