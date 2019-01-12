@@ -64,20 +64,10 @@ spring:
     host: localhost
     port: 6379
 
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
-#Hystrix的fallbackcmd的时间
-#hystrix:
-#  command:
-#    fallbackcmd:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 3000
 
 #Hystrix的fallbackcmd的时间，默认为1s
 hystrix:
@@ -87,13 +77,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 2000 #毫秒
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 5000
 #logging:
 #  level:
 #    org.springframework.cloud.gateway: TRACE
