@@ -52,16 +52,4 @@ public class HttpUtil {
         assert response.body() != null;
         return response.body().string();
     }
-
-    public static void main(String[] args) throws IOException {
-        int a = 0;
-//        while (true) {
-            System.out.println(a);
-        System.out.println(get("https://www.oschina.net/"));
-//            Thread.sleep(1000);
-//            if (a++ >= 100000) {
-//                break;
-//            }
-//        }
-    }
 }
