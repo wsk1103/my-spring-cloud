@@ -31,7 +31,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-public class SkyRateLimitByIpGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory implements GatewayFilter, Ordered {
+public class SkyRateLimitByIpGatewayFilterFactory
+        extends AbstractNameValueGatewayFilterFactory
+        implements GatewayFilter, Ordered {
 
     /**
      * 桶的最大容量，即能装载 Token 的最大数量
