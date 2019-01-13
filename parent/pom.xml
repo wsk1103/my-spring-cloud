@@ -8,6 +8,8 @@
     <name>parent</name>
     <description>Demo project for Spring Boot</description>
 
+    <!--作用： 导入公共jar-->
+
     <packaging>pom</packaging>
 
     <properties>
