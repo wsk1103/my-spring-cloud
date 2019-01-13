@@ -14,7 +14,7 @@ public enum  ErrorResDto implements Serializable {
     /**
      * 错误信息
      */
-    ERROR_RES_DTO(BaseResDto.builder().code(1001).msg("error").build()),
+    ERROR_RES_DTO(BaseResDto.builder().code(1001).msg("ERROR").build()),
 
     /**
      * 熔断
