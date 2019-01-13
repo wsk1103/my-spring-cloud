@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 异常基础类
  * @date 2018/11/30  16:32
  */
 public enum  ErrorResDto implements Serializable {

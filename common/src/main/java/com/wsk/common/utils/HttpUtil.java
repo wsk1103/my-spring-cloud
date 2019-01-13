@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description Http工具类
  * @date 2018/11/30  16:05
  */
 public class HttpUtil {
