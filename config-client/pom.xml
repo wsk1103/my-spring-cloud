@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>config-client</name>
-    <description>Demo project for Spring Boot</description>
+    <description>配置控制中心</description>
 
     <parent>
         <groupId>com.wsk</groupId>
