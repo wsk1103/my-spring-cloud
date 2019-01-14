@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 用户返回实体
  * @date 2018/11/25  20:54
  */
 @Data
