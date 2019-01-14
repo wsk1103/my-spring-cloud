@@ -6,7 +6,7 @@ import com.wsk.common.response.ErrorResDto;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 用于被继承，基础的控制类
  * @date 2018/11/30  16:27
  */
 public class BaseController {
