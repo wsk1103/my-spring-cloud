@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 转发服务类
  * @date 2018/11/23  10:46
  */
 @Service
