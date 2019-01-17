@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author wsk1103
+ */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableDiscoveryClient
