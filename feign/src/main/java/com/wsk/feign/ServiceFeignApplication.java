@@ -22,10 +22,10 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @EnableHystrix
 @EnableCircuitBreaker
-public class SericeFeignApplication {
+public class ServiceFeignApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SericeFeignApplication.class, args);
+        SpringApplication.run(ServiceFeignApplication.class, args);
     }
 
     @Bean
