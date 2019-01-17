@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * @author wsk1103
+ */
 @SpringBootApplication
 @EnableEurekaClient
 public class GatewayApplication {
