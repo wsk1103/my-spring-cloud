@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 控制中心
  * @date 2018/11/23  11:27
  */
 @RestController
