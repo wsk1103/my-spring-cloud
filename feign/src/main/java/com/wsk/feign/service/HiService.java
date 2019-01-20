@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author WuShukai
  * @version V1.0
- * @description
+ * @description 转发
  * @date 2018/11/23  11:26
  */
 @FeignClient(value = "service-client",fallback = HiServiceHystricImpl.class)
